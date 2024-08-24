@@ -1,5 +1,5 @@
 import express from 'express';
-import { fetchLecture, fetchLectures, getAllCourses, getSingleCourse } from '../controllers/course.js';
+import { fetchLecture, fetchLectures, getAllCourses, getMyCourses, getSingleCourse } from '../controllers/course.js';
 import { isAdmin, isAuth } from '../middlewares/isAuth.js';
 
 
@@ -9,5 +9,6 @@ router.get("/course/all", getAllCourses)
 router.get("/course/:id", getSingleCourse)
 router.get("/lectures/:id", isAuth, fetchLectures)
 router.get("/lecture/:id", isAuth, fetchLecture)
+router.get("/myCourse" , isAuth, getMyCourses)
 
 export default router;
