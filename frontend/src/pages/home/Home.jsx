@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
 import {useNavigate} from 'react-router-dom'
+import Testimonials from '../../components/testimonials/Testimonials'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -14,6 +15,7 @@ const Home = () => {
            className='common-btn'>Get Started</button>
         </div>
       </div>
+      <Testimonials/>
     </div>
   )
   
