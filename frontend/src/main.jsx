@@ -14,4 +14,5 @@ createRoot(document.getElementById('root')).render(
       </CourseContextProvider>
     </UserContextProvider>
   </StrictMode>,
+  <script src="https://js.stripe.com/v3" async></script>
 )

@@ -1,15 +1,23 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config();
+console.log('Stripe Secret Key:', process.env.STRIPE_SECRET_KEY);
+import express from 'express';
 import { connectDb } from './database/db.js';
 import cors from 'cors';
 
-dotenv.config();
+
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+    origin: 'http://localhost:5173', // Adjust based on your frontend URL
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
+
 app.use('/uploads', express.static('uploads'));
 
 
