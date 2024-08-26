@@ -73,8 +73,6 @@ export const checkout = TryCatch(async (req, res) => {
   try {
     // Retrieve the user and course
     const user = await User.findById(req.user._id);
-    console.log({"user": user});
-    console.log('Stripe Secret Key:', process.env.STRIPE_SECRET_KEY);
     const course = await Courses.findById(req.params.id);
 
     if (!course) {
