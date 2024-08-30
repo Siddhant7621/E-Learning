@@ -6,49 +6,47 @@ const CourseContext = createContext();
 
 export const CourseContextProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
-  const [course, setCourse] = useState(null); // Changed to null
+  const [course, setCourse] = useState([]);
   const [mycourse, setMyCourse] = useState([]);
 
-  const fetchCourses = async () => {
+  async function fetchCourses() {
     try {
       const { data } = await axios.get(`${server}/api/course/all`);
-      setCourses(data.courses);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    }
-  };
 
-  const fetchCourse = async (id) => {
+      setCourses(data.courses);
+      // console.log(data.courses);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchCourse(id) {
     try {
       const { data } = await axios.get(`${server}/api/course/${id}`);
       setCourse(data.course);
     } catch (error) {
-      console.error(`Error fetching course ${id}:`, error);
+      console.log(error);
     }
-  };
+  }
 
-  const fetchMyCourse = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.error("No token found");
-      return;
-    }
-
+  async function fetchMyCourse() {
     try {
       const { data } = await axios.get(`${server}/api/mycourse`, {
-        headers: { token },
+        headers: {
+          token: localStorage.getItem("token"),
+        },
       });
+
       setMyCourse(data.courses);
     } catch (error) {
-      console.error("Error fetching my courses:", error);
+      console.log(error);
     }
-  };
+  }
 
   useEffect(() => {
     fetchCourses();
     fetchMyCourse();
   }, []);
-
   return (
     <CourseContext.Provider
       value={{

@@ -14,6 +14,10 @@ import Loading from './components/loading/Loading';
 import Courses from './pages/courses/Courses';
 import CourseDescription from './pages/courseDescription/CourseDescription';
 import PaymentSuccess from './pages/paymentsuccess/PaymentSuccess';
+import Dashboard from "./pages/dashboard/Dashboard";
+import CouseStudy from "./pages/study/CouseStudy";
+import Lecture from "./pages/lecture/Lecture";
+
 
 
 
@@ -40,6 +44,14 @@ const App = () => {
               <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
               <Route path="/course/:id" element={isAuth ? <CourseDescription user={user} /> : <Login />} />
               <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccess user={user} /> : <Login />} />
+              <Route path=":id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
+              <Route path="account/:id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
+              <Route path="/course/study/:id" element={isAuth ? <CouseStudy user={user} /> : <Login />} />
+              <Route path="/lectures/:id" element={isAuth ? <Lecture user={user} /> : <Login />} />
+
+
+
+
             </Routes>
           
           <Footer />

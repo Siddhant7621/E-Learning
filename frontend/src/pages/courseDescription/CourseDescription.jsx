@@ -12,16 +12,15 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe("pk_test_51OuvygSFotcfnJdUMBjwJSVXhD60OujHbkkmKi00tjDw5g6gk9PsONtcFLsCMc3nsjgR0Op2oynQgapS837kYGoO001zQv2ztC");
 
 const CourseDescription = ({ user }) => {
-    const userCtx = useContext(UserContextProvider);
     const params = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const { fetchUser } = UserData();
-    const { fetchCourse, course } = CourseData();
+    const { fetchCourse, course, fetchCourses, fetchMyCourse  } = CourseData();
 
     useEffect(() => {
         fetchCourse(params.id);
-    }, [params.id, fetchCourse]);
+      }, []);
 
     
 
@@ -29,6 +28,7 @@ const CourseDescription = ({ user }) => {
 
         try {
             const token = localStorage.getItem("token");
+            setLoading(true);
             console.log(token);
             
             // Make a request to your server to create a checkout session
@@ -47,6 +47,8 @@ const CourseDescription = ({ user }) => {
                 throw new Error(`Network response was not ok. Status: ${response.status}, ${errorText}`);
             }
 
+            
+
             // Parse the JSON response
             const session = await response.json();
             console.log('Checkout session created:', session); // Debug: Log session details
@@ -60,10 +62,19 @@ const CourseDescription = ({ user }) => {
             // Handle any errors from Stripe
             if (result.error) {
                 console.error('Stripe Checkout error:', result.error.message);
+            } else {
+                // Fetch the user's courses after successful checkout
+                await fetchUser();
+                await fetchCourses();
+                await fetchMyCourse();
+                // toast.success(data.message);
+                setLoading(false);
             }
+            
         } catch (error) {
             console.error('Error during checkout:', error);
             toast.error(`Error during checkout: ${error.message}`);
+            setLoading(false);
         }
     };
 
