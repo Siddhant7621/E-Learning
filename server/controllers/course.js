@@ -59,13 +59,21 @@ export const fetchLecture = TryCatch(async(req, res) => {
     res.json({lecture});
 })
 
-export const getMyCourses = TryCatch(async(req, res) => {
-    const courses = await Courses.find({_id: req.user.subscription})
+export const getMyCourses = TryCatch(async (req, res) => {
+  const user = await User.findById(req.user._id);
 
-    res.json({
-        courses
-    })
-})
+  let courses;
+  if (user.role === "admin") {
+      // Admin sees only courses they created
+      courses = await Courses.find({ createdBy: user._id });
+  } else {
+      // Regular user sees only their subscribed courses
+      courses = await Courses.find({ _id: { $in: user.subscription } });
+  }
+
+  res.json({ courses });
+});
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 

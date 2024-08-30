@@ -13,7 +13,7 @@ router.post('/course/new', isAuth, isAdmin, uploadFiles, createCourse);
 // Route for adding a lecture to an existing course
 // Protected by isAuth and isAdmin middleware
 // Handles file uploads with uploadFiles middleware
-router.post('/course/:id/lecture', isAuth, isAdmin, uploadFiles, addLectures);
+router.post('/course/:id', isAuth, isAdmin, uploadFiles, addLectures);
 
 router.delete('/course/:id', isAuth, isAdmin, deleteCourse);
 router.delete('/lecture/:id', isAuth, isAdmin, deleteLecture);

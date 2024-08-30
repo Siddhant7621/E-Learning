@@ -17,6 +17,8 @@ import PaymentSuccess from './pages/paymentsuccess/PaymentSuccess';
 import Dashboard from "./pages/dashboard/Dashboard";
 import CouseStudy from "./pages/study/CouseStudy";
 import Lecture from "./pages/lecture/Lecture";
+import AdminDashboard from "./admin/Dashboard/AdminDashboard";
+import AdminCourses from "./admin/Courses/AdminCourses";
 
 
 
@@ -44,10 +46,14 @@ const App = () => {
               <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
               <Route path="/course/:id" element={isAuth ? <CourseDescription user={user} /> : <Login />} />
               <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccess user={user} /> : <Login />} />
-              <Route path=":id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
-              <Route path="account/:id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
+              <Route path="/:id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
+              <Route path="/account/:id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
               <Route path="/course/study/:id" element={isAuth ? <CouseStudy user={user} /> : <Login />} />
               <Route path="/lectures/:id" element={isAuth ? <Lecture user={user} /> : <Login />} />
+              <Route path="/admin/dashboard" element={isAuth ? <AdminDashboard user={user} /> : <Login />} />
+              <Route path="/account/admin/dashboard" element={isAuth ? <AdminDashboard user={user} /> : <Login />} />
+              <Route path="/admin/course" element={isAuth ? <AdminCourses user={user} /> : <Login />} />
+
 
 
 
