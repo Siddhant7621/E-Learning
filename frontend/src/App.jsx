@@ -1,7 +1,7 @@
 
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from './pages/home/home';
+import Home from './pages/home/Home';
 import Header from './components/header/Header';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -14,13 +14,14 @@ import Loading from './components/loading/Loading';
 import Courses from './pages/courses/Courses';
 import CourseDescription from './pages/courseDescription/CourseDescription';
 import PaymentSuccess from './pages/paymentsuccess/PaymentSuccess';
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/dashboard/DashBoard";
 import CouseStudy from "./pages/study/CouseStudy";
 import Lecture from "./pages/lecture/Lecture";
 import AdminDashboard from "./admin/Dashboard/AdminDashboard";
 import AdminCourses from "./admin/Courses/AdminCourses";
 import AdminUsers from "./admin/Users/AdminUsers";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 
 
@@ -47,6 +48,8 @@ const App = () => {
               <Route path="/register" element={isAuth ? <Home /> : <Register />} />
               <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
               <Route path="/forgot" element={isAuth ? <Home /> : <ForgotPassword />} />
+              <Route path="/reset-password/:token" element={isAuth ? <Home /> : <ResetPassword />} />
+
 
               <Route path="/course/:id" element={isAuth ? <CourseDescription user={user} /> : <Login />} />
               <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccess user={user} /> : <Login />} />
