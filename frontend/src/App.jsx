@@ -19,6 +19,8 @@ import CouseStudy from "./pages/study/CouseStudy";
 import Lecture from "./pages/lecture/Lecture";
 import AdminDashboard from "./admin/Dashboard/AdminDashboard";
 import AdminCourses from "./admin/Courses/AdminCourses";
+import AdminUsers from "./admin/Users/AdminUsers";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 
 
@@ -44,6 +46,8 @@ const App = () => {
               <Route path="/login" element={isAuth ? <Home /> : <Login />} />
               <Route path="/register" element={isAuth ? <Home /> : <Register />} />
               <Route path="/verify" element={isAuth ? <Home /> : <Verify />} />
+              <Route path="/forgot" element={isAuth ? <Home /> : <ForgotPassword />} />
+
               <Route path="/course/:id" element={isAuth ? <CourseDescription user={user} /> : <Login />} />
               <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccess user={user} /> : <Login />} />
               <Route path="/:id/dashboard" element={isAuth ? <Dashboard user={user} /> : <Login />} />
@@ -53,6 +57,8 @@ const App = () => {
               <Route path="/admin/dashboard" element={isAuth ? <AdminDashboard user={user} /> : <Login />} />
               <Route path="/account/admin/dashboard" element={isAuth ? <AdminDashboard user={user} /> : <Login />} />
               <Route path="/admin/course" element={isAuth ? <AdminCourses user={user} /> : <Login />} />
+              <Route path="/admin/users" element={isAuth ? <AdminUsers user={user} /> : <Login />} />
+
 
 
 
